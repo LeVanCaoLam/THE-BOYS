@@ -60,6 +60,28 @@ public class PlayerControll : MonoBehaviour
         {
             isAttack = Input.GetMouseButtonDown(0);
         }
+
+        // Kiểm tra có thể đánh không
+        if (!isAttack && currentState == CharacterState.Normal)
+        {
+            // Lấy GameSession
+            GameSession gameSession = FindObjectOfType<GameSession>();
+
+            // Nếu nhấn chuột và kiểm tra MP
+            if (Input.GetMouseButtonDown(0))
+            {
+                speed = 0f;
+                if (gameSession != null && gameSession.CurrentMP > 0)
+                {
+                    isAttack = true;
+                }
+                else
+                {
+                    // Không đủ MP
+                    Debug.Log("Không đủ MP để tấn công!");
+                }
+            }
+        }
     }
     private void FixedUpdate()
     {
@@ -76,11 +98,35 @@ public class PlayerControll : MonoBehaviour
     }
     void Caculated()
     {
+        // Lấy GameSession
+        GameSession gameSession = FindObjectOfType<GameSession>();
+
         if (isAttack)
         {
-            ChangeState(CharacterState.Attack);
-            animator1.SetFloat("Run", 0); // Ngưng lại movement để tấn công
-            return; // Kết thúc hẳn
+            if (gameSession != null)
+            {
+                if (gameSession.CurrentMP <= 0)
+                {
+                    // Có thể thêm âm thanh hoặc hiệu ứng báo không đủ MP
+                    Debug.Log("Không đủ MP để tấn công!");
+
+                    // Reset trạng thái tấn công
+                    isAttack = false;
+                    return;
+                }
+
+                // Thử bắt đầu tấn công (trừ 20 MP)
+                if (gameSession.StartAttack(10f))
+                {
+                    ChangeState(CharacterState.Attack);
+                    animator1.SetFloat("Run", 0); // Ngưng lại movement để tấn công
+                    return; // Kết thúc hẳn
+                }
+            }
+
+            //ChangeState(CharacterState.Attack);
+            //animator1.SetFloat("Run", 0); // Ngưng lại movement để tấn công
+            //return; // Kết thúc hẳn
         }
 
         //moveMent.Set(horizontal, 0, vertical);
@@ -165,6 +211,18 @@ public class PlayerControll : MonoBehaviour
 
     public void EndAttack() // Kết thúc state tấn công, quay về state normal
     {
+        ChangeState(CharacterState.Normal);
+
+        // Lấy component GameSession
+        GameSession gameSession = FindObjectOfType<GameSession>();
+
+        // Trừ MP khi tấn công thành công
+        if (gameSession != null)
+        {
+            gameSession.EndAttack();
+        }
+
+        // Chuyển về trạng thái normal
         ChangeState(CharacterState.Normal);
     }
 
