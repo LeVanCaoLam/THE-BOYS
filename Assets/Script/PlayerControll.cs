@@ -55,6 +55,13 @@ public class PlayerControll : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
+        if (currentState == CharacterState.Attack)
+        {
+            horizontal = 0;
+            vertical = 0;
+            return;
+        }
+
         // kiểm tra có thể đánh ko
         if (!isAttack)
         {
@@ -94,7 +101,17 @@ public class PlayerControll : MonoBehaviour
                 break;
         }
 
-        characterController1.Move(moveMent);
+        if (currentState == CharacterState.Normal)
+        {
+            Caculated();
+            characterController1.Move(moveMent);
+        }
+        else
+        {
+            moveMent = Vector3.zero;
+            characterController1.Move(moveMent);
+        }
+
     }
     void Caculated()
     {
@@ -181,6 +198,9 @@ public class PlayerControll : MonoBehaviour
         switch (currentState)
         {
             case CharacterState.Normal:
+                horizontal = 0;
+                vertical = 0;
+                moveMent = Vector3.zero;
                 break;
             case CharacterState.Attack:
                 break;
