@@ -72,7 +72,7 @@ public class PlayerControll : MonoBehaviour
         if (!isAttack && currentState == CharacterState.Normal)
         {
             // Lấy GameSession
-            GameSession gameSession = FindObjectOfType<GameSession>();
+            GameSession gameSession = FindFirstObjectByType<GameSession>();
 
             // Nếu nhấn chuột và kiểm tra MP
             if (Input.GetMouseButtonDown(0))
@@ -116,7 +116,7 @@ public class PlayerControll : MonoBehaviour
     void Caculated()
     {
         // Lấy GameSession
-        GameSession gameSession = FindObjectOfType<GameSession>();
+        GameSession gameSession = FindFirstObjectByType<GameSession>();
 
         if (isAttack)
         {
@@ -234,7 +234,7 @@ public class PlayerControll : MonoBehaviour
         ChangeState(CharacterState.Normal);
 
         // Lấy component GameSession
-        GameSession gameSession = FindObjectOfType<GameSession>();
+        GameSession gameSession = FindFirstObjectByType<GameSession>();
 
         // Trừ MP khi tấn công thành công
         if (gameSession != null)
