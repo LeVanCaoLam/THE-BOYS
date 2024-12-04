@@ -286,7 +286,7 @@ public class Player : MonoBehaviour
                 }
 
                 // Thử bắt đầu tấn công (trừ 20 MP)
-                if (gameSession.StartAttack(10f))
+                if (gameSession.StartAttack(5f))
                 {
                     ChangeState(CharacterState.Attack);
                     animator1.SetFloat("run", 0); // Ngưng lại movement để tấn công
