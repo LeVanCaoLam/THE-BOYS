@@ -6,6 +6,23 @@ public class PlayerControll : MonoBehaviour
 {
     public GameObject player;
 
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float gravity = -10f;
+    [SerializeField] private float groundDistance = 0.2f;
+    private Vector3 velocity;
+    private bool isGrounded;
+
+    public Rigidbody rb;
+
+    [SerializeField]
+    private float jumpForce = 10f;
+
+    [SerializeField]
+    AudioSource attackSource;
+    [SerializeField]
+    AudioSource jumpSource;
+
     [SerializeField]
     private CharacterController characterController1;
 
@@ -16,7 +33,9 @@ public class PlayerControll : MonoBehaviour
     private float speed = 3f;
 
     [SerializeField]
-    private float rotationSpeed = 10f;
+    private float turnSmoothTime = 0.2f;
+
+    private float rotationSpeed;
 
     [SerializeField]
     Animator animator1;
@@ -52,6 +71,14 @@ public class PlayerControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Gọi hàm nhảy
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+            animator1.SetBool("isGrounded", true);
+        }
+
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
@@ -89,13 +116,26 @@ public class PlayerControll : MonoBehaviour
                 }
             }
         }
+
+        // nhảy 1 lần
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            animator1.SetTrigger("Jump");
+            animator1.SetBool("isGrounded", false);
+            jumpSource.PlayOneShot(jumpSource.clip);
+            CaculatedMove();
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+        characterController1.Move(velocity * Time.deltaTime);
     }
     private void FixedUpdate()
     {
         switch (currentState)
         {
             case CharacterState.Normal:
-                Caculated();
+                CaculatedMove();
                 break;
             case CharacterState.Attack:
                 break;
@@ -103,7 +143,7 @@ public class PlayerControll : MonoBehaviour
 
         if (currentState == CharacterState.Normal)
         {
-            Caculated();
+            CaculatedMove();
             characterController1.Move(moveMent);
         }
         else
@@ -112,81 +152,64 @@ public class PlayerControll : MonoBehaviour
             characterController1.Move(moveMent);
         }
 
+        // xử lý phần mid_air cho player
+        animator1.SetFloat("Jump_Air", velocity.y);
     }
-    void Caculated()
-    {
-        // Lấy GameSession
-        GameSession gameSession = FindFirstObjectByType<GameSession>();
-
-        if (isAttack)
+        void CaculatedMove()
         {
-            if (gameSession != null)
+            // Lấy GameSession
+            GameSession gameSession = FindFirstObjectByType<GameSession>();
+
+            if (isAttack)
             {
-                if (gameSession.CurrentMP <= 0)
+                if (gameSession != null)
                 {
-                    // Có thể thêm âm thanh hoặc hiệu ứng báo không đủ MP
-                    Debug.Log("Không đủ MP để tấn công!");
+                    if (gameSession.CurrentMP <= 0)
+                    {
+                        // Có thể thêm âm thanh hoặc hiệu ứng báo không đủ MP
+                        Debug.Log("Không đủ MP để tấn công!");
 
-                    // Reset trạng thái tấn công
-                    isAttack = false;
-                    return;
-                }
+                        // Reset trạng thái tấn công
+                        isAttack = false;
+                        return;
+                    }
 
-                // Thử bắt đầu tấn công (trừ 20 MP)
-                if (gameSession.StartAttack(10f))
-                {
-                    ChangeState(CharacterState.Attack);
-                    animator1.SetFloat("Run", 0); // Ngưng lại movement để tấn công
-                    return; // Kết thúc hẳn
+                    // Thử bắt đầu tấn công (trừ 20 MP)
+                    if (gameSession.StartAttack(10f))
+                    {
+                        ChangeState(CharacterState.Attack);
+                        animator1.SetFloat("Run", 0); // Ngưng lại movement để tấn công
+                        return; // Kết thúc hẳn
+                    }
                 }
             }
 
-            //ChangeState(CharacterState.Attack);
-            //animator1.SetFloat("Run", 0); // Ngưng lại movement để tấn công
-            //return; // Kết thúc hẳn
+            // di chuyển
+            Transform cameraTransform = Camera.main.transform;
+
+            Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+
+            if (direction.magnitude >= 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + 
+                                                    cameraTransform.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, 
+                                                      ref rotationSpeed, turnSmoothTime);
+
+                transform.rotation = Quaternion.Euler(0, angle, 0);
+
+                Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+
+                characterController1.Move(moveDirection.normalized * speed * Time.deltaTime);
+
+                // Cập nhật animation chạy
+                animator1.SetFloat("Run", moveDirection.magnitude);
+            }
+            else
+            {
+                animator1.SetFloat("Run", 0f);
+            }
         }
-
-        //moveMent.Set(horizontal, 0, vertical);
-        //moveMent.Normalize();
-
-        //moveMent = Quaternion.Euler(0, -45, 0) * moveMent;
-        //moveMent *= speed * Time.deltaTime;
-
-        //animator1.SetFloat("run", moveMent.magnitude);
-
-        //if (moveMent != Vector3.zero)
-        //{
-        //    transform.rotation = Quaternion.LookRotation(moveMent);
-        //}
-
-        // Lấy hướng của camera
-        Vector3 cameraForward = Camera.main.transform.forward;
-        Vector3 cameraRight = Camera.main.transform.right;
-
-        // Loại bỏ thành phần Y để di chuyển trên mặt phẳng
-        cameraForward.y = 0;
-        cameraRight.y = 0;
-        cameraForward.Normalize();
-        cameraRight.Normalize();
-
-        // Tính toán vector di chuyển dựa trên input và hướng camera
-        moveMent = cameraForward * vertical + cameraRight * horizontal;
-        moveMent.Normalize();
-
-        // Áp dụng tốc độ
-        moveMent *= speed * Time.deltaTime;
-
-        // Cập nhật animator
-        animator1.SetFloat("Run", moveMent.magnitude);
-
-        // Xoay nhân vật theo hướng di chuyển (như Elden Ring)
-        if (moveMent != Vector3.zero)
-        {
-            // Sử dụng Slerp để xoay mượt mà
-            Quaternion targetRotation = Quaternion.LookRotation(moveMent);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
-    }
 
     // Hàm thay đổi trạng thái hiện tại sang trạng thái mong muốn
     private void ChangeState(CharacterState newState)
@@ -214,6 +237,7 @@ public class PlayerControll : MonoBehaviour
 
             case CharacterState.Attack:
                 animator1.SetTrigger("Atk1");
+                attackSource.PlayOneShot(attackSource.clip);
                 StartCoroutine(TriggerAttackCoroutine());
                 break;
         }

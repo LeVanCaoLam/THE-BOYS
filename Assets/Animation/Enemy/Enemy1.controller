@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxChaseDistance: 30.04
-  stopChaseDistance: 2
+  stopChaseDistance: 2.8
   originalPosition: {x: 244.02, y: 2.49, z: 755.55}
 --- !u!1107 &2373562282573338065
 AnimatorStateMachine:
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c943a8b10dd684786fd5b1963012c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAtkDistance: 2
+  meleeAtkDistance: 2.8
 --- !u!1101 &3731575724962781890
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
