@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/Menu.unity
     guid: 02cb314edcc8dee4497afccc61d5ef42
   - enabled: 1
     path: Assets/Scenes/Map1.unity
     guid: ec08f9d6033300e468b57109c3e0b0da
+=======
+    path: Assets/TungLaTao/LowPoly Forest - Lite/Scenes 1/MainMenu.unity
+    guid: 916c66a4ef6681240b651e2e752af90f
+  - enabled: 1
+    path: Assets/TungLaTao/LowPoly Forest - Lite/Scenes 1/Game.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+>>>>>>> tung
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
