@@ -6,7 +6,11 @@ QualitySettings:
   serializedVersion: 5
   m_CurrentQuality: 5
   m_QualitySettings:
+<<<<<<< HEAD
   - serializedVersion: 4
+=======
+  - serializedVersion: 3
+>>>>>>> Minh
     name: Very Low
     pixelLightCount: 0
     shadows: 0
@@ -28,11 +32,16 @@ QualitySettings:
     realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 0
     useLegacyDetailDistribution: 1
+<<<<<<< HEAD
     adaptiveVsync: 0
     vSyncCount: 0
     realtimeGICPUUsage: 25
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
+=======
+    vSyncCount: 0
+    realtimeGICPUUsage: 25
+>>>>>>> Minh
     lodBias: 0.3
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -47,7 +56,11 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+    customRenderPipeline: {fileID: 11400000, guid: f7a14a60e73117945841d57e188cbea8, type: 2}
+>>>>>>> Minh
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -58,7 +71,11 @@ QualitySettings:
     terrainFadeLength: 5
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
+<<<<<<< HEAD
   - serializedVersion: 4
+=======
+  - serializedVersion: 3
+>>>>>>> Minh
     name: Low
     pixelLightCount: 0
     shadows: 0
@@ -80,11 +97,16 @@ QualitySettings:
     realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 0
     useLegacyDetailDistribution: 1
+<<<<<<< HEAD
     adaptiveVsync: 0
     vSyncCount: 0
     realtimeGICPUUsage: 25
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
+=======
+    vSyncCount: 0
+    realtimeGICPUUsage: 25
+>>>>>>> Minh
     lodBias: 0.4
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -99,7 +121,11 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+    customRenderPipeline: {fileID: 11400000, guid: 376aad05662fbd54991f2a40bb5d7d63, type: 2}
+>>>>>>> Minh
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -110,7 +136,11 @@ QualitySettings:
     terrainFadeLength: 5
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
+<<<<<<< HEAD
   - serializedVersion: 4
+=======
+  - serializedVersion: 3
+>>>>>>> Minh
     name: Medium
     pixelLightCount: 1
     shadows: 1
@@ -132,11 +162,16 @@ QualitySettings:
     realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 0
     useLegacyDetailDistribution: 1
+<<<<<<< HEAD
     adaptiveVsync: 0
     vSyncCount: 1
     realtimeGICPUUsage: 25
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
+=======
+    vSyncCount: 1
+    realtimeGICPUUsage: 25
+>>>>>>> Minh
     lodBias: 0.7
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -151,7 +186,11 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+    customRenderPipeline: {fileID: 11400000, guid: 9dcf41fed49040246b328742ec90f7cf, type: 2}
+>>>>>>> Minh
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -162,7 +201,11 @@ QualitySettings:
     terrainFadeLength: 5
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
+<<<<<<< HEAD
   - serializedVersion: 4
+=======
+  - serializedVersion: 3
+>>>>>>> Minh
     name: High
     pixelLightCount: 2
     shadows: 2
@@ -184,11 +227,16 @@ QualitySettings:
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
+<<<<<<< HEAD
     adaptiveVsync: 0
     vSyncCount: 1
     realtimeGICPUUsage: 50
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
+=======
+    vSyncCount: 1
+    realtimeGICPUUsage: 50
+>>>>>>> Minh
     lodBias: 1
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -203,7 +251,11 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+    customRenderPipeline: {fileID: 11400000, guid: 802a7ace109991f49ae76e51f7d53a68, type: 2}
+>>>>>>> Minh
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -214,7 +266,11 @@ QualitySettings:
     terrainFadeLength: 5
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
+<<<<<<< HEAD
   - serializedVersion: 4
+=======
+  - serializedVersion: 3
+>>>>>>> Minh
     name: Very High
     pixelLightCount: 3
     shadows: 2
@@ -236,11 +292,16 @@ QualitySettings:
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
+<<<<<<< HEAD
     adaptiveVsync: 0
     vSyncCount: 1
     realtimeGICPUUsage: 50
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
+=======
+    vSyncCount: 1
+    realtimeGICPUUsage: 50
+>>>>>>> Minh
     lodBias: 1.5
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -255,7 +316,11 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+    customRenderPipeline: {fileID: 11400000, guid: 329cfeaf34d752a428f7563e954f3ef4, type: 2}
+>>>>>>> Minh
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -266,7 +331,11 @@ QualitySettings:
     terrainFadeLength: 5
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
+<<<<<<< HEAD
   - serializedVersion: 4
+=======
+  - serializedVersion: 3
+>>>>>>> Minh
     name: Ultra
     pixelLightCount: 4
     shadows: 2
@@ -288,11 +357,16 @@ QualitySettings:
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
+<<<<<<< HEAD
     adaptiveVsync: 0
     vSyncCount: 1
     realtimeGICPUUsage: 100
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
+=======
+    vSyncCount: 1
+    realtimeGICPUUsage: 100
+>>>>>>> Minh
     lodBias: 2
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -307,7 +381,11 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
+<<<<<<< HEAD
     customRenderPipeline: {fileID: 0}
+=======
+    customRenderPipeline: {fileID: 11400000, guid: c64ac5f6c6aedac40be5a5fa89e4df27, type: 2}
+>>>>>>> Minh
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1

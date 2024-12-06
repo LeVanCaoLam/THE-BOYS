@@ -5,6 +5,7 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
 AssetOrigin:
   serializedVersion: 1
   productId: 182586
@@ -12,3 +13,5 @@ AssetOrigin:
   packageVersion: 1.3.0
   assetPath: Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_Unity2021.3+.unitypackage
   uploadId: 647003
+=======
+>>>>>>> Minh
