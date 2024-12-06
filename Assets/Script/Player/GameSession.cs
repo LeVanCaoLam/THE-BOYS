@@ -125,10 +125,12 @@ public class GameSession : MonoBehaviour
     {
         currentMP = Mathf.Max(0, currentMP - amount);
         UpdateMPUI();
+
         if (mpRecoveryCoroutine != null)
         {
             StopCoroutine(mpRecoveryCoroutine);
         }
+        mpRecoveryCoroutine = StartCoroutine(RecoverMPOverTime());
     }
 
     // Phương thức để hồi phục MP
