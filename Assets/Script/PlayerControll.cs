@@ -117,18 +117,7 @@ public class PlayerControll : MonoBehaviour
             }
         }
 
-        // nhảy 1 lần
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-            animator1.SetTrigger("Jump");
-            animator1.SetBool("isGrounded", false);
-            jumpSource.PlayOneShot(jumpSource.clip);
-            CaculatedMove();
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-        characterController1.Move(velocity * Time.deltaTime);
+        JumpHigh();
     }
     private void FixedUpdate()
     {
@@ -155,61 +144,95 @@ public class PlayerControll : MonoBehaviour
         // xử lý phần mid_air cho player
         animator1.SetFloat("Jump_Air", velocity.y);
     }
-        void CaculatedMove()
+
+    void JumpHigh()
+    {
+        // Kiểm tra nếu đang ở trên mặt đất và nhấn phím nhảy
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             // Lấy GameSession
-            GameSession gameSession = FindFirstObjectByType<GameSession>();
+            GameSession gameSession1 = FindFirstObjectByType<GameSession>();
 
-            if (isAttack)
+            // Kiểm tra MP đủ để nhảy
+            if (gameSession1 != null && gameSession1.CurrentMP > 0)
             {
-                if (gameSession != null)
-                {
-                    if (gameSession.CurrentMP <= 0)
-                    {
-                        // Có thể thêm âm thanh hoặc hiệu ứng báo không đủ MP
-                        Debug.Log("Không đủ MP để tấn công!");
+                velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+                animator1.SetTrigger("Jump");
 
-                        // Reset trạng thái tấn công
-                        isAttack = false;
-                        return;
-                    }
+                // Trừ MP sau khi nhảy
+                gameSession1.UseMP(5f);
 
-                    // Thử bắt đầu tấn công (trừ 20 MP)
-                    if (gameSession.StartAttack(10f))
-                    {
-                        ChangeState(CharacterState.Attack);
-                        animator1.SetFloat("Run", 0); // Ngưng lại movement để tấn công
-                        return; // Kết thúc hẳn
-                    }
-                }
-            }
-
-            // di chuyển
-            Transform cameraTransform = Camera.main.transform;
-
-            Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
-
-            if (direction.magnitude >= 0.1f)
-            {
-                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + 
-                                                    cameraTransform.eulerAngles.y;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, 
-                                                      ref rotationSpeed, turnSmoothTime);
-
-                transform.rotation = Quaternion.Euler(0, angle, 0);
-
-                Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
-                characterController1.Move(moveDirection.normalized * speed * Time.deltaTime);
-
-                // Cập nhật animation chạy
-                animator1.SetFloat("Run", moveDirection.magnitude);
+                animator1.SetBool("isGrounded", false);
+                jumpSource.PlayOneShot(jumpSource.clip);
+                CaculatedMove();
             }
             else
             {
-                animator1.SetFloat("Run", 0f);
+                // Thông báo không đủ MP để nhảy
+                Debug.Log("Không đủ MP để nhảy!");
             }
         }
+
+        // Áp dụng trọng lực khi nhân vật không ở trên mặt đất
+        velocity.y += gravity * Time.deltaTime;
+        characterController1.Move(velocity * Time.deltaTime);
+    }
+
+    void CaculatedMove()
+    {
+        // Lấy GameSession
+        GameSession gameSession = FindFirstObjectByType<GameSession>();
+
+        if (isAttack)
+        {
+            if (gameSession != null)
+            {
+                if (gameSession.CurrentMP <= 0)
+                {
+                    // Có thể thêm âm thanh hoặc hiệu ứng báo không đủ MP
+                    Debug.Log("Không đủ MP để tấn công!");
+
+                    // Reset trạng thái tấn công
+                    isAttack = false;
+                    return;
+                }
+
+                // Thử bắt đầu tấn công (trừ 20 MP)
+                if (gameSession.StartAttack(10f))
+                {
+                    ChangeState(CharacterState.Attack);
+                    animator1.SetFloat("Run", 0); // Ngưng lại movement để tấn công
+                    return; // Kết thúc hẳn
+                }
+            }
+        }
+
+        // di chuyển
+        Transform cameraTransform = Camera.main.transform;
+
+        Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+
+        if (direction.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg +
+                                                cameraTransform.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,
+                                                  ref rotationSpeed, turnSmoothTime);
+
+            transform.rotation = Quaternion.Euler(0, angle, 0);
+
+            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+
+            characterController1.Move(moveDirection.normalized * speed * Time.deltaTime);
+
+            // Cập nhật animation chạy
+            animator1.SetFloat("Run", moveDirection.magnitude);
+        }
+        else
+        {
+            animator1.SetFloat("Run", 0f);
+        }
+    }
 
     // Hàm thay đổi trạng thái hiện tại sang trạng thái mong muốn
     private void ChangeState(CharacterState newState)
@@ -274,13 +297,13 @@ public class PlayerControll : MonoBehaviour
     private IEnumerator TriggerAttackCoroutine()
     {
         // Đợi 1 giây
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
         // Bật trigger object
         triggerAttack.SetActive(true);
 
         // Đợi 0.5 giây
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.15f);
 
         // Tắt trigger object
         triggerAttack.SetActive(false);

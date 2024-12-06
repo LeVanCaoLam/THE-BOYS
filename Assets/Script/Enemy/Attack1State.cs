@@ -10,6 +10,7 @@ public class Attack1State : StateMachineBehaviour
     private NavMeshAgent navMeshAsuna;
     private Transform player;
     private Transform enemy;
+    private Enemy_Health enemy_Health;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,19 +18,28 @@ public class Attack1State : StateMachineBehaviour
         enemy = animator.transform;
 
         navMeshAsuna = enemy.GetComponent<NavMeshAgent>();
+        enemy_Health = enemy.GetComponent<Enemy_Health>();
         navMeshAsuna.isStopped = true; // Dừng di chuyển
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (player != null && navMeshAsuna != null)
+        if (player != null && navMeshAsuna != null || enemy_Health != null)
         {
             float distanceToPlayer = Vector3.Distance(enemy.position, player.position);
 
             // Luôn quay về phía player
             Vector3 directionToPlayer = (player.position - enemy.position).normalized;
             enemy.rotation = Quaternion.LookRotation(directionToPlayer);
+
+            // Kiểm tra có khoá tấn công ko
+            if (enemy_Health.GetLockAttack())
+            {
+                animator.SetBool("isAtkPlayer", false);
+                animator.SetBool("isChase", false);
+                return;
+            }
 
             // Nếu player còn trong phạm vi bắn
             if (distanceToPlayer <= meleeAtkDistance)
@@ -59,16 +69,4 @@ public class Attack1State : StateMachineBehaviour
             navMeshAsuna.ResetPath();
         }
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }
