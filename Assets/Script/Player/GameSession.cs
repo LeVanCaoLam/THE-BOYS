@@ -21,6 +21,8 @@ public class GameSession : MonoBehaviour
     // Coroutine để quản lý việc hồi phục MP
     private Coroutine mpRecoveryCoroutine;
 
+    [SerializeField] AudioSource hurtPlayerSource;
+
     void Start()
     {
         // Khởi tạo HP và MP ban đầu
@@ -154,6 +156,15 @@ public class GameSession : MonoBehaviour
         if (currentHP <= 0)
         {
             Debug.Log("Player đã died");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("EnemyAttack"))
+        {
+            hurtPlayerSource.PlayOneShot(hurtPlayerSource.clip);
+            TakeDamaged(7f);
         }
     }
 }

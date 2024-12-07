@@ -57,7 +57,7 @@ public class Enemy_Attack : MonoBehaviour
             animator.SetTrigger("isAtkPlayer");
         }
 
-        yield return new WaitForSeconds(0.6f); // Đợi trước khi bật trigger
+        yield return new WaitForSeconds(0.3f); // Đợi trước khi bật trigger
         attackTrigger.SetActive(true);
 
         yield return new WaitForSeconds(0.6f); // Kích hoạt trigger trong khoảng thời gian
