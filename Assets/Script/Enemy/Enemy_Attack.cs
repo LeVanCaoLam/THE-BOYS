@@ -7,12 +7,16 @@ public class Enemy_Attack : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] float distanceAtk = 2.7f;
 
+    private Vector3 originalPos;
+
     private GameSession playerSession;
     private Animator animator;
     private bool isAttacking;
 
     void Start()
     {
+        originalPos = transform.position;
+
         attackTrigger.SetActive(false);
         isAttacking = false;
 
@@ -29,15 +33,15 @@ public class Enemy_Attack : MonoBehaviour
     {
         if (target != null)
         {
-            // Chỉ điều chỉnh trục Y để quay mặt về phía Player
-            Vector3 directionToPlayer = target.position - transform.position;
-            directionToPlayer.y = 0; // Giữ cố định trục X
-            transform.rotation = Quaternion.LookRotation(directionToPlayer);
-
             float distanceToPlayer = Vector3.Distance(transform.position, target.position);
 
             if (distanceToPlayer <= distanceAtk && !isAttacking)
             {
+                // Chỉ điều chỉnh trục Y để quay mặt về phía Player
+                Vector3 directionToPlayer = target.position - transform.position;
+                directionToPlayer.y = 0; // Giữ cố định trục X
+                transform.rotation = Quaternion.LookRotation(directionToPlayer);
+
                 StartCoroutine(EnableAtkTrigger());
             }
         }

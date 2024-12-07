@@ -37,16 +37,24 @@ public class Attack1State : StateMachineBehaviour
                 return;
             }
 
-            // Giữ Enemy xoay mặt về phía Player
-            Vector3 directionToPlayer = player.position - enemy.position;
-            directionToPlayer.y = 0; // Cố định trục X
-            enemy.rotation = Quaternion.LookRotation(directionToPlayer);
-
             if (distanceToPlayer > meleeAtkDistance)
             {
                 animator.SetBool("isAtkPlayer", false);
                 animator.SetBool("isChase", true);
             }
+            else if (distanceToPlayer <= meleeAtkDistance)
+            {
+                // Giữ Enemy xoay mặt về phía Player
+                Vector3 directionToPlayer = player.position - enemy.position;
+                directionToPlayer.y = 0; // Cố định trục X
+                enemy.rotation = Quaternion.LookRotation(directionToPlayer);
+            }
+        }
+        else
+        {
+            // Nếu Enemy chết hoặc không có Player, dừng tấn công
+            animator.SetBool("isAtkPlayer", false);
+            animator.SetBool("isChase", false);
         }
     }
 

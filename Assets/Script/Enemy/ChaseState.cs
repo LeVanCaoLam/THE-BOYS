@@ -11,6 +11,8 @@ public class ChaseState : StateMachineBehaviour
     private Vector3 originalPosition;
     private NavMeshAgent navMeshAsuna;
 
+    private bool hasReturnedToOrigin = false;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -21,9 +23,13 @@ public class ChaseState : StateMachineBehaviour
         if (navMeshAsuna != null)
         {
             navMeshAsuna.isStopped = false;
-            navMeshAsuna.updateRotation = true; // Cho phép NavMesh tự xoay hướng
+            navMeshAsuna.updateRotation = true;
         }
+
+        animator.SetBool("isChase", false); // Reset trạng thái ở đầu
+        hasReturnedToOrigin = false;
     }
+
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -33,36 +39,50 @@ public class ChaseState : StateMachineBehaviour
 
             if (distanceToPlayer <= maxChaseDistance)
             {
-                if (distanceToPlayer <= stopChaseDistance)
+                hasReturnedToOrigin = false;
+
+                if (distanceToPlayer >= stopChaseDistance)
+                {
+                    Vector3 directionToPlayer = player.position - enemy.position;
+                    directionToPlayer.y = 0;
+                    enemy.rotation = Quaternion.LookRotation(directionToPlayer);
+
+                    navMeshAsuna.isStopped = false;
+                    navMeshAsuna.SetDestination(player.position);
+                }
+                else
                 {
                     navMeshAsuna.isStopped = true;
                     animator.SetBool("isChase", false);
                     animator.SetBool("isAtkPlayer", true);
                 }
-                else
-                {
-                    // Đuổi theo Player
-                    navMeshAsuna.SetDestination(player.position);
-                }
             }
             else
             {
-                // Quay lại vị trí ban đầu nếu Player thoát khỏi phạm vi
-                navMeshAsuna.SetDestination(originalPosition);
+                Debug.Log($"Remaining Distance: {navMeshAsuna.remainingDistance}, PathPending: {navMeshAsuna.pathPending}");
+                Debug.Log($"Has Returned To Origin: {hasReturnedToOrigin}");
 
-                if (Vector3.Distance(enemy.position, originalPosition) <= 0.1f)
+                if (!navMeshAsuna.pathPending && navMeshAsuna.remainingDistance <= 2.1f
+                        && Vector3.Distance(enemy.position, originalPosition) <= 2.1f)
                 {
-                    navMeshAsuna.isStopped = true;
-                    animator.SetBool("isChase", false);
+                    if (!hasReturnedToOrigin)
+                    {
+                        navMeshAsuna.isStopped = true;
+                        animator.SetBool("isChase", false);
+                        hasReturnedToOrigin = true;
+
+                        Debug.Log("Enemy has returned to origin. Setting isChase to false.");
+                        enemy.rotation = Quaternion.identity;
+                    }
+                }
+                else
+                {
+                    navMeshAsuna.SetDestination(originalPosition);
                 }
             }
-
-            // Giữ Enemy xoay mặt về phía Player nhưng không thay đổi trục X
-            Vector3 directionToPlayer = player.position - enemy.position;
-            directionToPlayer.y = 0; // Cố định trục X
-            enemy.rotation = Quaternion.LookRotation(directionToPlayer);
         }
     }
+
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

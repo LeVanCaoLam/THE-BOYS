@@ -16,6 +16,10 @@ public class DieState : StateMachineBehaviour
             navMeshAgent.isStopped = true;
         }
 
+        // Đảm bảo huỷ mọi trạng thái trong Animator
+        animator.SetBool("isChase", false);
+        animator.SetBool("isAtkPlayer", false);
+
         Collider collider = animator.GetComponent<Collider>();
         if (collider != null)
         {
