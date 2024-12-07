@@ -10,6 +10,8 @@ public class Enemy_Health : MonoBehaviour
     [SerializeField] GameObject enemyMany;
 
     [SerializeField] AudioSource hitFromPlayer;
+    [SerializeField] AudioSource hurtSource;
+    [SerializeField] AudioSource dieSource;
 
     private Animator animator;
     private bool isLockAttack = false;
@@ -33,15 +35,17 @@ public class Enemy_Health : MonoBehaviour
             if (animator != null)
             {
                 animator.SetBool("isAtkPlayer", false);
-
                 animator.SetTrigger("isHurt");
+
+                hurtSource.PlayOneShot(hurtSource.clip);
             }
         }
         else if (currentHealth <= 0)
         {
             animator.SetBool("isDead", true);
-            Destroy(gameObject, 1f);
-            Destroy(enemyMany, 1f);
+            dieSource.PlayOneShot(dieSource.clip);
+            Destroy(gameObject, 1.2f);
+            Destroy(enemyMany, 1.2f);
         }
     }
     void UpdateHealhHUD()
