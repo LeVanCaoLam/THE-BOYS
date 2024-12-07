@@ -144,4 +144,16 @@ public class GameSession : MonoBehaviour
     {
         get { return currentMP; }
     }
+
+    public void TakeDamaged(float damage)
+    {
+        currentHP = Mathf.Max(0, currentHP - damage);
+
+        UpdateHPUI();
+
+        if (currentHP <= 0)
+        {
+            Debug.Log("Player đã died");
+        }
+    }
 }

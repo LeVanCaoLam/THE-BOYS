@@ -40,8 +40,8 @@ public class Enemy_Health : MonoBehaviour
         else if (currentHealth <= 0)
         {
             animator.SetBool("isDead", true);
-            Destroy(gameObject, 1.5f);
-            Destroy(enemyMany, 1.5f);
+            Destroy(gameObject, 1f);
+            Destroy(enemyMany, 1f);
         }
     }
     void UpdateHealhHUD()

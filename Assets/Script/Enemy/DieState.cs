@@ -24,7 +24,7 @@ public class DieState : StateMachineBehaviour
 
         // Huỷ gameObject sau thời gian đặt trước
         animator.GetComponent<Enemy_Health>()
-            .StartCoroutine(DestroyEnemyAfterTime(animator.gameObject, 1.5f));
+            .StartCoroutine(DestroyEnemyAfterTime(animator.gameObject, 1f));
     }
 
     private IEnumerator DestroyEnemyAfterTime(GameObject enemy, float delay)
