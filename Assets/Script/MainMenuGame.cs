@@ -13,6 +13,7 @@ public class MainMenuGame : MonoBehaviour
     public AudioSource selectSource;
     public AudioSource exitSource;
     public AudioSource choosingSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,15 +38,27 @@ public class MainMenuGame : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Map1");
         selectSource.PlayOneShot(selectSource.clip);
-        Debug.Log("Vào game thành công");
+
+        Invoke(nameof(PlayThisGame), 1f);
+    }
+
+    void PlayThisGame()
+    {
+        SceneManager.LoadScene(1);
+        Debug.Log("Vào được game 1");
     }
 
     public void ExitGame()
     {
-        Application.Quit();
         exitSource.PlayOneShot(exitSource.clip);
-        Debug.Log("Đã thoát game thành công");
+
+        Invoke(nameof(ExitThisGame), 1f);
+    }
+
+    void ExitThisGame()
+    {
+        Application.Quit();
+        Debug.Log("Thoát game được rồi");
     }
 }

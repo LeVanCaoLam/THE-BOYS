@@ -27,6 +27,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] AudioSource hurtPlayerSource;
     [SerializeField] AudioSource playerLoudHurt;
 
+    [Header("--- HUD Game Over ---")]
     [SerializeField] GameObject gameOver;
     [SerializeField] Image backgroundGameOver;
     [SerializeField] TextMeshProUGUI textGameOver;
