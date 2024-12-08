@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
@@ -24,6 +26,10 @@ public class GameSession : MonoBehaviour
 
     [SerializeField] AudioSource hurtPlayerSource;
     [SerializeField] AudioSource playerLoudHurt;
+
+    [SerializeField] GameObject gameOver;
+    [SerializeField] Image backgroundGameOver;
+    [SerializeField] TextMeshProUGUI textGameOver;
 
     void Start()
     {
@@ -165,6 +171,8 @@ public class GameSession : MonoBehaviour
             Debug.Log("Player đã died");
             animatorP.SetBool("Dead", true);
 
+            TriggerGameOverScreen(); // hiệu ứng rõ dần của UI game over
+
             // Tắt script và collider
             CharacterController characterController = GetComponent<CharacterController>();
             if (characterController != null)
@@ -219,5 +227,60 @@ public class GameSession : MonoBehaviour
             playerLoudHurt.PlayOneShot(playerLoudHurt.clip);
             TakeDamaged(5f);
         }
+    }
+
+    // hiệu ứng UI khi player chết
+    public void TriggerGameOverScreen()
+    {
+        gameOver.SetActive(true); // Bật màn hình Game Over
+        StartCoroutine(FadeInGameOverElements());
+    }
+
+    private IEnumerator FadeInGameOverElements()
+    {
+        float duration = 2f; // Thời gian hiệu ứng (2 giây)
+        float elapsedTime = 0f;
+
+        Color backgroundColor = backgroundGameOver.color;
+        Color textColor = textGameOver.color;
+
+        // Đặt alpha ban đầu về 0
+        backgroundColor.a = 0f;
+        textColor.a = 0f;
+
+        backgroundGameOver.color = backgroundColor;
+        textGameOver.color = textColor;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / duration);
+
+            // Cập nhật alpha
+            backgroundColor.a = alpha;
+            textColor.a = alpha;
+
+            backgroundGameOver.color = backgroundColor;
+            textGameOver.color = textColor;
+
+            yield return null;
+        }
+
+        // Đảm bảo alpha đạt 1 sau khi hiệu ứng kết thúc
+        backgroundColor.a = 1f;
+        textColor.a = 1f;
+
+        backgroundGameOver.color = backgroundColor;
+        textGameOver.color = textColor;
+
+        // Chờ thêm 2 giây trước khi tải lại scene
+        yield return new WaitForSeconds(2f);
+        ReloadCurrentScene();
+    }
+    private void ReloadCurrentScene()
+    {
+        // Tải lại scene hiện tại
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 }
