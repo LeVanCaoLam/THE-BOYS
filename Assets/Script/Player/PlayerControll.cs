@@ -13,8 +13,6 @@ public class PlayerControll : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
 
-    public Rigidbody rb;
-
     [SerializeField]
     private float jumpForce = 10f;
 
@@ -22,8 +20,6 @@ public class PlayerControll : MonoBehaviour
     AudioSource attackSource;
     [SerializeField]
     AudioSource jumpSource;
-    [SerializeField]
-    AudioSource runSource;
 
     [SerializeField]
     private CharacterController characterController1;
@@ -47,6 +43,8 @@ public class PlayerControll : MonoBehaviour
 
     // biến kiểm tra player có thực hiện đánh ko
     private bool isAttack;
+    // kiểm tra player có bị thương ko
+    private bool isHurt = false;
 
     // biến trạng thái của nhân vật
     public enum CharacterState
@@ -67,9 +65,21 @@ public class PlayerControll : MonoBehaviour
         triggerAttack.SetActive(false);
     }
 
+    public void SetHurtState(bool hurt)
+    {
+        isHurt = hurt;
+        if (hurt)
+        {
+            StopAllActions(); // Ngừng mọi hành động
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        // ko làm gì nếu bị thương
+        if (isHurt) return;
+
         // Gọi hàm nhảy
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0)
@@ -307,4 +317,18 @@ public class PlayerControll : MonoBehaviour
         // Tắt trigger object
         triggerAttack.SetActive(false);
     }
+    public void EnableControll()
+    {
+        isHurt = false; // Cho phép điều khiển lại
+    }
+
+    public void StopAllActions()
+    {
+        StopAllCoroutines(); // Dừng tất cả coroutine
+        horizontal = 0;
+        vertical = 0;
+        isAttack = false;
+        currentState = CharacterState.Normal;
+    }
+
 }

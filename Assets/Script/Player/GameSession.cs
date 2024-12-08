@@ -20,6 +20,7 @@ public class GameSession : MonoBehaviour
 
     // Coroutine để quản lý việc hồi phục MP
     private Coroutine mpRecoveryCoroutine;
+    private Animator animatorP;
 
     [SerializeField] AudioSource hurtPlayerSource;
     [SerializeField] AudioSource playerLoudHurt;
@@ -31,6 +32,8 @@ public class GameSession : MonoBehaviour
         Cursor.visible = false;
         // Khởi tạo HP và MP ban đầu
         InitializePlayerStats();
+        // Lấy Animator
+        animatorP = GetComponent<Animator>();
     }
 
     void InitializePlayerStats()
@@ -144,12 +147,67 @@ public class GameSession : MonoBehaviour
     public void TakeDamaged(float damage)
     {
         currentHP = Mathf.Max(0, currentHP - damage);
-
+        animatorP.SetTrigger("Hurt");
         UpdateHPUI();
+
+        PlayerControll playerController = GetComponent<PlayerControll>();
+        if (playerController != null)
+        {
+            if (playerController != null)
+            {
+                playerController.SetHurtState(true);
+            }
+            StartCoroutine(EnablePlayerAfterHurt());
+        }
 
         if (currentHP <= 0)
         {
             Debug.Log("Player đã died");
+            animatorP.SetBool("Dead", true);
+
+            // Tắt script và collider
+            CharacterController characterController = GetComponent<CharacterController>();
+            if (characterController != null)
+            {
+                characterController.enabled = false;
+            }
+
+            // Tắt hẳn PlayerControll
+            playerController.StopAllActions();
+            playerController.enabled = false;
+
+            // Tắt Rigidbody và Capsule Collider
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true; // Ngăn mọi tương tác vật lý
+            }
+
+            CapsuleCollider collider = GetComponent<CapsuleCollider>();
+            if (collider != null)
+            {
+                collider.enabled = false; // Tắt collider
+            }
+
+            enabled = false; // Tắt GameSession
+        }
+        else
+        {
+            // Kích hoạt lại sau hoạt ảnh bị thương
+            StartCoroutine(EnablePlayerAfterHurt());
+        }
+    }
+
+    private IEnumerator EnablePlayerAfterHurt()
+    {
+        yield return new WaitForSeconds(animatorP.GetCurrentAnimatorStateInfo(0).length);
+
+        PlayerControll playerController = GetComponent<PlayerControll>();
+
+        if (playerController != null)
+        {
+            playerController.SetHurtState(false); // Cho phép điều khiển lại
+            playerController.EnableControll();
         }
     }
 
