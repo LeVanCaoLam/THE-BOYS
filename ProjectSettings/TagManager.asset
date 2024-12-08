@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - PlayerAttack
   - EnemyAttack
+  - Heal
   layers:
   - Default
   - TransparentFX

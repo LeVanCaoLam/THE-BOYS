@@ -146,6 +146,12 @@ public class GameSession : MonoBehaviour
         UpdateMPUI();
     }
 
+    public void HealHP(float amounts)
+    {
+        currentHP = Mathf.Min(maxHP, currentHP + amounts);
+        UpdateHPUI();
+    }
+
     public float CurrentMP
     {
         get { return currentMP; }
@@ -227,6 +233,12 @@ public class GameSession : MonoBehaviour
             hurtPlayerSource.PlayOneShot(hurtPlayerSource.clip);
             playerLoudHurt.PlayOneShot(playerLoudHurt.clip);
             TakeDamaged(5f);
+        }
+
+        if (other.CompareTag("Heal"))
+        {
+            HealHP(20f);
+            Destroy(other.gameObject, 0.2f);
         }
     }
 
