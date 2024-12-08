@@ -22,6 +22,8 @@ public class PlayerControll : MonoBehaviour
     AudioSource attackSource;
     [SerializeField]
     AudioSource jumpSource;
+    [SerializeField]
+    AudioSource runSource;
 
     [SerializeField]
     private CharacterController characterController1;
@@ -60,9 +62,6 @@ public class PlayerControll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Ẩn con trỏ chuột
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
         characterController1 = GetComponent<CharacterController>();
         animator1 = GetComponent<Animator>();
         triggerAttack.SetActive(false);

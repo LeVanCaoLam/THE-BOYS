@@ -9,6 +9,7 @@ public class Attack1State : StateMachineBehaviour
     private Transform player;
     private Transform enemy;
     private Enemy_Health enemy_Health;
+    private Enemy_Attack enemy_Attack;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -16,10 +17,16 @@ public class Attack1State : StateMachineBehaviour
         enemy = animator.transform;
         navMeshAsuna = enemy.GetComponent<NavMeshAgent>();
         enemy_Health = enemy.GetComponent<Enemy_Health>();
+        enemy_Attack = enemy.GetComponent<Enemy_Attack>();
 
         if (navMeshAsuna != null)
         {
             navMeshAsuna.isStopped = true;
+        }
+
+        if (enemy_Attack != null)
+        {
+            enemy_Attack.AttackTrigger();
         }
     }
 
@@ -66,6 +73,11 @@ public class Attack1State : StateMachineBehaviour
         {
             navMeshAsuna.isStopped = false;
             navMeshAsuna.ResetPath();
+        }
+
+        if (enemy_Attack != null)
+        {
+            enemy_Attack.ResetAttackTrigger();
         }
     }
 }

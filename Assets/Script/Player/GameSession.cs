@@ -22,9 +22,13 @@ public class GameSession : MonoBehaviour
     private Coroutine mpRecoveryCoroutine;
 
     [SerializeField] AudioSource hurtPlayerSource;
+    [SerializeField] AudioSource playerLoudHurt;
 
     void Start()
     {
+        // Ẩn trỏ chuột
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         // Khởi tạo HP và MP ban đầu
         InitializePlayerStats();
     }
@@ -72,16 +76,6 @@ public class GameSession : MonoBehaviour
             StopCoroutine(mpRecoveryCoroutine);
         }
         mpRecoveryCoroutine = StartCoroutine(RecoverMPOverTime());
-    }
-
-    // Gửi sát thương cho Enemy
-    public void DealDamageToEnemy(float damage)
-    {
-        Enemy_Health enemy_Health = GetComponent<Enemy_Health>();
-        if (enemy_Health != null)
-        {
-            enemy_Health.TakeDamage(damage);
-        }
     }
 
     // Coroutine hồi phục MP theo thời gian
@@ -164,7 +158,8 @@ public class GameSession : MonoBehaviour
         if (other.CompareTag("EnemyAttack"))
         {
             hurtPlayerSource.PlayOneShot(hurtPlayerSource.clip);
-            TakeDamaged(7f);
+            playerLoudHurt.PlayOneShot(playerLoudHurt.clip);
+            TakeDamaged(5f);
         }
     }
 }

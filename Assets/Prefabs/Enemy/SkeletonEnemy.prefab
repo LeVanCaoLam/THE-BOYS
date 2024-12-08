@@ -636,7 +636,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 81c41d5635287f24493f1bcada9083b6, type: 3}
   m_Resource: {fileID: 8300000, guid: 81c41d5635287f24493f1bcada9083b6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.727
+  m_Volume: 0.767
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -978,8 +978,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger: {fileID: 8084090063241363977}
-  target: {fileID: 0}
-  distanceAtk: 2.6
+  attackStart: 0.35
+  attackDuring: 0.4
 --- !u!65 &4363153171423441285
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1574,7 +1574,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 02ba9cff284fdf744886671c69655d4c, type: 3}
   m_Resource: {fileID: 8300000, guid: 02ba9cff284fdf744886671c69655d4c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.577
+  m_Volume: 0.824
   m_Pitch: 1
   Loop: 0
   Mute: 0
