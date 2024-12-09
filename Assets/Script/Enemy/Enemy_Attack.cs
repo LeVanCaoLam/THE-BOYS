@@ -4,8 +4,8 @@ using UnityEngine;
 public class Enemy_Attack : MonoBehaviour
 {
     [SerializeField] GameObject attackTrigger;
-    [SerializeField] float attackStart = 0.1f;
-    [SerializeField] float attackDuring = 0.5f;
+    [SerializeField] float attackStart = 0.35f;
+    [SerializeField] float attackDuring = 0.4f;
 
     private bool is_Attacking = false;
 

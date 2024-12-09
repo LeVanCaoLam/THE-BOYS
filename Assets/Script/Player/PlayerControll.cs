@@ -14,7 +14,7 @@ public class PlayerControll : MonoBehaviour
     private bool isGrounded;
 
     [SerializeField]
-    private float jumpForce = 10f;
+    private float jumpForce = 5f;
 
     [SerializeField]
     AudioSource attackSource;
@@ -28,7 +28,7 @@ public class PlayerControll : MonoBehaviour
     private float horizontal, vertical;
 
     [SerializeField]
-    private float speed = 3f;
+    private float speed = 4f;
 
     [SerializeField]
     private float turnSmoothTime = 0.2f;
