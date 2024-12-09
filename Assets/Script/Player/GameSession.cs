@@ -24,13 +24,20 @@ public class GameSession : MonoBehaviour
     private Coroutine mpRecoveryCoroutine;
     private Animator animatorP;
 
+    [Header("<------ Audio ------>")]
     [SerializeField] AudioSource hurtPlayerSource;
     [SerializeField] AudioSource playerLoudHurt;
+    [SerializeField] AudioSource healSound;
+    [SerializeField] AudioSource coinSound;
 
     [Header("--- HUD Game Over ---")]
     [SerializeField] GameObject gameOver;
     [SerializeField] Image backgroundGameOver;
     [SerializeField] TextMeshProUGUI textGameOver;
+
+    [Header("---- HUD Collect Coin ----")]
+    [SerializeField] TextMeshProUGUI coinText;
+    private int coinCount = 0; // Thêm biến để theo dõi số lượng coin
 
     void Start()
     {
@@ -238,7 +245,32 @@ public class GameSession : MonoBehaviour
         if (other.CompareTag("Heal"))
         {
             HealHP(20f);
-            Destroy(other.gameObject, 0.2f);
+            healSound.PlayOneShot(healSound.clip);
+            Destroy(other.gameObject, 0.015f);
+        }
+
+        if (other.CompareTag("Coin"))
+        {
+            coinCount += 10;
+            coinSound.PlayOneShot(coinSound.clip);
+            coinText.text = coinCount.ToString();
+            Destroy(other.gameObject, 0.015f);
+        }
+
+        if (other.CompareTag("Emerald"))
+        {
+            coinCount += 50;
+            coinSound.PlayOneShot(coinSound.clip);
+            coinText.text = coinCount.ToString();
+            Destroy(other.gameObject, 0.015f);
+        }
+
+        if (other.CompareTag("Diamond"))
+        {
+            coinCount += 100;
+            coinSound.PlayOneShot(coinSound.clip);
+            coinText.text = coinCount.ToString();
+            Destroy(other.gameObject, 0.015f);
         }
     }
 

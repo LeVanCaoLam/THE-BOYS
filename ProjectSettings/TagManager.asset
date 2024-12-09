@@ -8,6 +8,9 @@ TagManager:
   - PlayerAttack
   - EnemyAttack
   - Heal
+  - Coin
+  - Diamond
+  - Emerald
   layers:
   - Default
   - TransparentFX
