@@ -111,10 +111,29 @@ public class PauseGame : MonoBehaviour
 
     public void ReloadGame()
     {
+        // Lưu giá trị coin
+        SaveCoinCount();
+
         blueButton.PlayOneShot(blueButton.clip);
 
         isReload = true;
         returnStartTime = Time.realtimeSinceStartup;
+    }
+
+    private void SaveCoinCount()
+    {
+        // Lấy giá trị coin từ GameSession
+        GameSession gameSession = FindFirstObjectByType<GameSession>();
+        if (gameSession != null)
+        {
+            int currentCoinCount = gameSession.CoinCount; // Sử dụng một thuộc tính CoinCount trong GameSession
+            PlayerPrefs.SetInt("CoinCount", currentCoinCount);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            Debug.LogWarning("GameSession không được tìm thấy. Không thể lưu coin.");
+        }
     }
 
     public void ReturnToMenuGame()
