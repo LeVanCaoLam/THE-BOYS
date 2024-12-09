@@ -636,7 +636,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 81c41d5635287f24493f1bcada9083b6, type: 3}
   m_Resource: {fileID: 8300000, guid: 81c41d5635287f24493f1bcada9083b6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.767
+  m_Volume: 0.811
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -777,7 +777,7 @@ Transform:
   m_GameObject: {fileID: 2192898665713987842}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 303.7, y: 2.511, z: 724.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -942,7 +942,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.98
-  m_BaseOffset: 0
+  m_BaseOffset: -0.15
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 3
 --- !u!114 &5507405651823429293
@@ -1574,7 +1574,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 02ba9cff284fdf744886671c69655d4c, type: 3}
   m_Resource: {fileID: 8300000, guid: 02ba9cff284fdf744886671c69655d4c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.824
+  m_Volume: 0.88
   m_Pitch: 1
   Loop: 0
   Mute: 0
