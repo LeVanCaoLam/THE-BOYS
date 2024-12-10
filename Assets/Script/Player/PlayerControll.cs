@@ -16,10 +16,15 @@ public class PlayerControll : MonoBehaviour
     [SerializeField]
     private float jumpForce = 5f;
 
+    [Header("<<----- Audio ----->>")]
     [SerializeField]
     AudioSource attackSource;
     [SerializeField]
     AudioSource jumpSource;
+    [SerializeField]
+    AudioSource moveSource;
+    [SerializeField]
+    AudioSource cancelMoveSource;
 
     [SerializeField]
     private CharacterController characterController1;
@@ -45,6 +50,9 @@ public class PlayerControll : MonoBehaviour
     private bool isAttack;
     // kiểm tra player có bị thương ko
     private bool isHurt = false;
+
+    // biến thay đổi tốc độ
+    private bool isLeftShift = false;
 
     // biến trạng thái của nhân vật
     public enum CharacterState
@@ -127,6 +135,8 @@ public class PlayerControll : MonoBehaviour
         }
 
         JumpHigh();
+
+        BoostRun();
     }
     private void FixedUpdate()
     {
@@ -185,6 +195,22 @@ public class PlayerControll : MonoBehaviour
         // Áp dụng trọng lực khi nhân vật không ở trên mặt đất
         velocity.y += gravity * Time.deltaTime;
         characterController1.Move(velocity * Time.deltaTime);
+    }
+
+    void BoostRun()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && isLeftShift)
+        {
+            moveSource.PlayOneShot(moveSource.clip);
+            speed = 11f;
+            isLeftShift = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && !isLeftShift)
+        {
+            cancelMoveSource.PlayOneShot(cancelMoveSource.clip);
+            speed = 4f;
+            isLeftShift = true;
+        }
     }
 
     void CaculatedMove()

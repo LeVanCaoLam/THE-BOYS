@@ -29,6 +29,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] AudioSource playerLoudHurt;
     [SerializeField] AudioSource healSound;
     [SerializeField] AudioSource coinSound;
+    [SerializeField] AudioSource bongHitSound;
 
     [Header("--- HUD Game Over ---")]
     [SerializeField] GameObject gameOver;
@@ -257,6 +258,8 @@ public class GameSession : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Triggered by: {other.tag}");
+
         if (other.CompareTag("EnemyAttack"))
         {
             hurtPlayerSource.PlayOneShot(hurtPlayerSource.clip);
@@ -264,9 +267,16 @@ public class GameSession : MonoBehaviour
             TakeDamaged(5f);
         }
 
+        if (other.CompareTag("BossAttack"))
+        {
+            bongHitSound.PlayOneShot(bongHitSound.clip);
+            playerLoudHurt.PlayOneShot(playerLoudHurt.clip);
+            TakeDamaged(10f);
+        }
+
         if (other.CompareTag("Heal"))
         {
-            HealHP(20f);
+            HealHP(30f);
             healSound.PlayOneShot(healSound.clip);
             Destroy(other.gameObject, 0.015f);
         }
@@ -347,9 +357,13 @@ public class GameSession : MonoBehaviour
     private void ReloadCurrentScene()
     {
         SaveCoinCount(); // Lưu lại số coin trước khi tải lại scene
+
         // Tải lại scene hiện tại
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+
+        // Reset trạng thái GameSession sau khi scene được tải lại
+        InitializePlayerStats();
     }
 
     public int CoinCount

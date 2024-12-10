@@ -1,24 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuGame : MonoBehaviour
 {
+    [Header("<----- Button ----->")]
     public Button playButton;
     public Button exitButton;
+    public Button clearCache;
+
+    [Header("<----- Audio ----->")]
     public AudioSource menuAudio;
     public AudioClip menuClip;
     public AudioSource selectSource;
     public AudioSource exitSource;
     public AudioSource choosingSource;
 
+    [SerializeField] private GameObject clearNotice;
+
     // Start is called before the first frame update
     void Start()
     {
         menuAudio = GetComponent<AudioSource>();
         menuClip = GetComponent<AudioClip>();
+
+        clearNotice.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,6 +42,11 @@ public class MainMenuGame : MonoBehaviour
         if (exitButton != null)
         {
             exitButton = GetComponent<Button>();
+        }
+
+        if (clearCache != null)
+        {
+            clearCache = GetComponent<Button>();
         }
     }
 
@@ -79,5 +93,29 @@ public class MainMenuGame : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Thoát game được rồi");
+    }
+
+    public void ClearAllInformation()
+    {
+        exitSource.PlayOneShot(exitSource.clip);
+        Invoke(nameof(ClearComplete), 1f);
+    }
+
+    void ClearComplete()
+    {
+        PlayerPrefs.DeleteAll(); // Xóa toàn bộ dữ liệu trong PlayerPrefs
+        PlayerPrefs.Save();
+        Debug.Log("Đã clear tất cả dữ liệu người chơi");
+        clearNotice.SetActive(true);
+
+        StartCoroutine(DisableClearNotice());
+    }
+
+    IEnumerator DisableClearNotice()
+    {
+        yield return new WaitForSeconds(2f);
+        clearNotice.SetActive(false);
+
+        StopCoroutine(DisableClearNotice());
     }
 }

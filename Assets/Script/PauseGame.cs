@@ -27,7 +27,7 @@ public class PauseGame : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pauseCanvas?.SetActive(false);
+        pauseCanvas.SetActive(false);
         Time.timeScale = 1.0f;
 
         // Ẩn và khóa trỏ chuột khi bắt đầu game
@@ -85,7 +85,7 @@ public class PauseGame : MonoBehaviour
 
     private void Pause()
     {
-        pauseCanvas?.SetActive(true);
+        pauseCanvas.SetActive(true);
         Time.timeScale = 0.0f; // Dừng game
         isPause = true;
 
@@ -98,7 +98,7 @@ public class PauseGame : MonoBehaviour
 
     public void ResumeGame()
     {
-        pauseCanvas?.SetActive(false);
+        pauseCanvas.SetActive(false);
         Time.timeScale = 1.0f;
         isPause = false;
 

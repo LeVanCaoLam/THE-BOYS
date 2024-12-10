@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NextLevel : MonoBehaviour
@@ -21,9 +21,37 @@ public class NextLevel : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Invoke(nameof(NextLevelBelongTime), 0.3f);
+            PlayerControll playerControll = FindFirstObjectByType<PlayerControll>();
+
+            if (playerControll != null)
+            {
+                playerControll.SetHurtState(true);
+            }
+
+            teleportSource.PlayOneShot(teleportSource.clip);
+            // Lưu giá trị coin
+            SaveCoinCount();
+
+            Invoke(nameof(NextLevelBelongTime), 1f);
         }
     }
+
+    private void SaveCoinCount()
+    {
+        // Lấy giá trị coin từ GameSession
+        GameSession gameSession = FindFirstObjectByType<GameSession>();
+        if (gameSession != null)
+        {
+            int currentCoinCount = gameSession.CoinCount; // Sử dụng một thuộc tính CoinCount trong GameSession
+            PlayerPrefs.SetInt("CoinCount", currentCoinCount);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            Debug.LogWarning("GameSession không được tìm thấy. Không thể lưu coin.");
+        }
+    }
+
     void NextLevelBelongTime()
     {
         SceneManager.LoadScene(indexLevel);
