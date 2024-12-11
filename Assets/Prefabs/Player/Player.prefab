@@ -2079,8 +2079,8 @@ MonoBehaviour:
   playerLoudHurt: {fileID: 6241003353196233276}
   healSound: {fileID: 5754057694614361688}
   coinSound: {fileID: 2546784195878279101}
-  bongHitSound: {fileID: 0}
-  hitChest: {fileID: 0}
+  bongHitSound: {fileID: 4131251694315699509}
+  hitChest: {fileID: 2869292730157630045}
   gameOver: {fileID: 927432221399640981}
   backgroundGameOver: {fileID: 4859551078698746698}
   textGameOver: {fileID: 4529629069505432697}

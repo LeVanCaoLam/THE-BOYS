@@ -40,6 +40,7 @@ public class GameSession : MonoBehaviour
     [Header("---- HUD Collect Coin ----")]
     [SerializeField] TextMeshProUGUI coinText;
     private int coinCount = 0; // Thêm biến để theo dõi số lượng coin
+    private float startTime;
 
     void Start()
     {
@@ -49,6 +50,19 @@ public class GameSession : MonoBehaviour
         LoadCoinCount(); // Khôi phục số coin từ PlayerPrefs
         UpdateCoinText(); // Cập nhật UI
         animatorP = GetComponent<Animator>();
+
+        // Kiểm tra xem đã có thời gian bắt đầu chưa
+        if (PlayerPrefs.HasKey("GameStartTime"))
+        {
+            // Nếu đã có, lấy thời gian đã lưu
+            startTime = PlayerPrefs.GetFloat("GameStartTime");
+        }
+        else
+        {
+            // Nếu chưa có, tạo mới
+            startTime = Time.time;
+            PlayerPrefs.SetFloat("GameStartTime", startTime);
+        }
     }
 
     private void SaveCoinCount()
@@ -186,6 +200,11 @@ public class GameSession : MonoBehaviour
     public float CurrentMP
     {
         get { return currentMP; }
+    }
+
+    public float StartTime
+    {
+        get { return startTime; }
     }
 
     public void TakeDamaged(float damage)
@@ -368,6 +387,13 @@ public class GameSession : MonoBehaviour
 
         // Reset trạng thái GameSession sau khi scene được tải lại
         InitializePlayerStats();
+    }
+
+    public void ResetGameTime()
+    {
+        startTime = Time.time;
+        PlayerPrefs.SetFloat("GameStartTime", startTime);
+        PlayerPrefs.Save();
     }
 
     public int CoinCount
