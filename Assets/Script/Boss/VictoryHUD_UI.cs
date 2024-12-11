@@ -15,7 +15,6 @@ public class VictoryHUD_UI : MonoBehaviour
     [SerializeField] AudioSource victoryMusic;
 
     private GameSession gameSession;
-    private float startTimer;
     private ChestThrowItems chest;
 
     private void Awake()
@@ -24,8 +23,6 @@ public class VictoryHUD_UI : MonoBehaviour
         {
             victoryUI.SetActive(false);
         }
-
-        startTimer = Time.time;
     }
 
     private void Start()
@@ -40,6 +37,16 @@ public class VictoryHUD_UI : MonoBehaviour
 
         // Thử tìm chest ngay lập tức
         TryFindChest();
+    }
+
+    private void Update()
+    {
+        if (victoryUI.activeSelf)
+        {
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     private void TryFindChest()
@@ -105,7 +112,7 @@ public class VictoryHUD_UI : MonoBehaviour
 
         if (timeText != null)
         {
-            float playTime = Time.time - startTimer;
+            float playTime = Time.time - gameSession.StartTime;
             timeText.text = FormatTime(playTime);
         }
     }
