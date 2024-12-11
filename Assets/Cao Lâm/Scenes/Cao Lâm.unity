@@ -4740,6 +4740,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1148495102246279007, guid: b270caa7ec6b9494eb67f1c75db7c31d, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 77fe77c87f8e9814384ae9f7e6345d75, type: 3}
+    - target: {fileID: 1148495102246279007, guid: b270caa7ec6b9494eb67f1c75db7c31d, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 77fe77c87f8e9814384ae9f7e6345d75, type: 3}
     - target: {fileID: 1484382737983489050, guid: b270caa7ec6b9494eb67f1c75db7c31d, type: 3}
       propertyPath: m_Name
       value: Day 05 - Magic Gate optim2
@@ -4784,11 +4792,39 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5359377912239351774, guid: b270caa7ec6b9494eb67f1c75db7c31d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1484382737983489050, guid: b270caa7ec6b9494eb67f1c75db7c31d, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 385302685090634153}
   m_SourcePrefab: {fileID: 100100000, guid: b270caa7ec6b9494eb67f1c75db7c31d, type: 3}
+--- !u!1 &385302685090634151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1484382737983489050, guid: b270caa7ec6b9494eb67f1c75db7c31d, type: 3}
+  m_PrefabInstance: {fileID: 385302685090634150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &385302685090634152 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1148495102246279007, guid: b270caa7ec6b9494eb67f1c75db7c31d, type: 3}
+  m_PrefabInstance: {fileID: 385302685090634150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &385302685090634153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385302685090634151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c9a5436d1ae454b81b3ea55b09cbec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indexLevel: 2
+  teleportSource: {fileID: 385302685090634152}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

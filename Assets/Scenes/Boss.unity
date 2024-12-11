@@ -2058,10 +2058,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8686035378230172289, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1963922156791019007, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 840021864}
   m_SourcePrefab: {fileID: 100100000, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
 --- !u!82 &240060632 stripped
 AudioSource:
@@ -2071,6 +2075,58 @@ AudioSource:
 --- !u!82 &240060633 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 2869292730157630045, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
+  m_PrefabInstance: {fileID: 240060631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &240060634 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4529629069505432697, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
+  m_PrefabInstance: {fileID: 240060631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &240060635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4859551078698746698, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
+  m_PrefabInstance: {fileID: 240060631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &240060636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 927432221399640981, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
+  m_PrefabInstance: {fileID: 240060631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &240060637 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2546784195878279101, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
+  m_PrefabInstance: {fileID: 240060631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &240060638 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5754057694614361688, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
+  m_PrefabInstance: {fileID: 240060631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &240060639 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2903396867901959344, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
+  m_PrefabInstance: {fileID: 240060631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &240060640 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6241003353196233276, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
+  m_PrefabInstance: {fileID: 240060631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &240060641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1963922156791019007, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
   m_PrefabInstance: {fileID: 240060631}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &246202219
@@ -8297,6 +8353,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1155895027516075845, guid: bbc52bc8920f5fd4f828e61916d9bfd2, type: 3}
   m_PrefabInstance: {fileID: 240060631}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &840021864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240060641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d38af8723825f4a429440e1c18f1400b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  currentHP: 0
+  maxMP: 100
+  currentMP: 0
+  mpRecoveryRate: 30
+  mpRecoveryDelay: 0.7
+  HP_Player: {fileID: 1530219885}
+  MP_Player: {fileID: 1530219884}
+  hurtPlayerSource: {fileID: 240060639}
+  playerLoudHurt: {fileID: 240060640}
+  healSound: {fileID: 240060638}
+  coinSound: {fileID: 240060637}
+  bongHitSound: {fileID: 240060632}
+  hitChest: {fileID: 240060633}
+  gameOver: {fileID: 240060636}
+  backgroundGameOver: {fileID: 240060635}
+  textGameOver: {fileID: 240060634}
+  coinText: {fileID: 1530219883}
 --- !u!1 &841677971
 GameObject:
   m_ObjectHideFlags: 0
