@@ -1,0 +1,277 @@
+fileFormatVersion: 2
+guid: d28a6a65930a50741b16acf97eb07156
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Miku_55(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: alpha_MZ_0_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0.2034683, y: 2.741925, z: 0.33176413}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: arm_01_1_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.7697799, z: -0.20401719}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: arm_01_1_1_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.7697799, z: -0.20401719}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: arm_01_1_2_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.7697799, z: -0.20401719}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: arm_01_1_3_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.7697799, z: -0.20401719}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: body_hada_2_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 2.234145, z: -0.10926067}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: body_hada_2_1_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 2.234145, z: -0.10926067}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_1_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_2_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_3_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_4_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_5_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_6_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_7_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_8_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_9_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: jacket_4_10_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 1.6383848, z: -0.21785243}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: tie_c_5_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0.0002357997, y: 3.0385973, z: 0.21165586}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: back_MZ_0_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0.000002503395, y: 4.470311, z: -0.4472226}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: front_MZ_1_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 3.0766225, z: -0.65115017}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: front_MZ_1_1_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 3.0766225, z: -0.65115017}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: front_MZ_1_2_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 3.8036273, z: -0.6512937}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: head_set_2_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0.000003993511, y: 4.611442, z: -0.54571915}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: hair_tie_3_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 5.441745, z: -0.91811156}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: head_org_0_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0, y: 4.1665797, z: 0.06882216}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: eyeball_1_0_node
+      parentName: Miku_55(Clone)
+      position: {x: 0.00068721175, y: 4.0552654, z: 0.5268841}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: head_back_2_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0.000007987022, y: 3.9870934, z: 0.43294367}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: eye_007_22_0_node
+      parentName: Miku_55(Clone)
+      position: {x: 0.008484132, y: 4.1181397, z: 0.6862057}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: eyebrow_008_56_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -0.013281912, y: 4.434351, z: 0.8059258}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: mouth_000_0_0_node
+      parentName: Miku_55(Clone)
+      position: {x: 0.008186394, y: 3.518225, z: 0.46313724}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: te_006_l_6_0_node
+      parentName: Miku_55(Clone)
+      position: {x: -1.8972149, y: 2.8798997, z: -0.09478171}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: te_006_r_19_0_node
+      parentName: Miku_55(Clone)
+      position: {x: 1.8972149, y: 2.8798997, z: -0.09478171}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -27,7 +27,7 @@ public class PauseGame : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pauseCanvas?.SetActive(false);
+        pauseCanvas.SetActive(false);
         Time.timeScale = 1.0f;
 
         // Ẩn và khóa trỏ chuột khi bắt đầu game
@@ -85,7 +85,7 @@ public class PauseGame : MonoBehaviour
 
     private void Pause()
     {
-        pauseCanvas?.SetActive(true);
+        pauseCanvas.SetActive(true);
         Time.timeScale = 0.0f; // Dừng game
         isPause = true;
 
@@ -98,7 +98,7 @@ public class PauseGame : MonoBehaviour
 
     public void ResumeGame()
     {
-        pauseCanvas?.SetActive(false);
+        pauseCanvas.SetActive(false);
         Time.timeScale = 1.0f;
         isPause = false;
 
@@ -111,10 +111,29 @@ public class PauseGame : MonoBehaviour
 
     public void ReloadGame()
     {
+        // Lưu giá trị coin
+        SaveCoinCount();
+
         blueButton.PlayOneShot(blueButton.clip);
 
         isReload = true;
         returnStartTime = Time.realtimeSinceStartup;
+    }
+
+    private void SaveCoinCount()
+    {
+        // Lấy giá trị coin từ GameSession
+        GameSession gameSession = FindFirstObjectByType<GameSession>();
+        if (gameSession != null)
+        {
+            int currentCoinCount = gameSession.CoinCount; // Sử dụng một thuộc tính CoinCount trong GameSession
+            PlayerPrefs.SetInt("CoinCount", currentCoinCount);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            Debug.LogWarning("GameSession không được tìm thấy. Không thể lưu coin.");
+        }
     }
 
     public void ReturnToMenuGame()

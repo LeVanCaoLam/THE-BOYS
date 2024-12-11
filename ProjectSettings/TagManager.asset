@@ -11,7 +11,8 @@ TagManager:
   - Coin
   - Diamond
   - Emerald
-  - enemy
+  - BossAttack
+  - Chest
   layers:
   - Default
   - TransparentFX

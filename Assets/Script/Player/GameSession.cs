@@ -29,6 +29,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] AudioSource playerLoudHurt;
     [SerializeField] AudioSource healSound;
     [SerializeField] AudioSource coinSound;
+    [SerializeField] AudioSource bongHitSound;
+    [SerializeField] AudioSource hitChest;
 
     [Header("--- HUD Game Over ---")]
     [SerializeField] GameObject gameOver;
@@ -41,14 +43,34 @@ public class GameSession : MonoBehaviour
 
     void Start()
     {
-        // Ẩn trỏ chuột
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        // Khởi tạo HP và MP ban đầu
         InitializePlayerStats();
-        // Lấy Animator
+        LoadCoinCount(); // Khôi phục số coin từ PlayerPrefs
+        UpdateCoinText(); // Cập nhật UI
         animatorP = GetComponent<Animator>();
     }
+
+    private void SaveCoinCount()
+    {
+        PlayerPrefs.SetInt("CoinCount", coinCount); // Lưu giá trị coinCount
+        PlayerPrefs.Save(); // Đảm bảo lưu dữ liệu xuống ổ cứng
+    }
+
+    private void LoadCoinCount()
+    {
+        coinCount = PlayerPrefs.GetInt("CoinCount", 0); // Giá trị mặc định là 0 nếu không có dữ liệu
+        UpdateCoinText(); // Cập nhật UI
+    }
+
+    private void UpdateCoinText()
+    {
+        if (coinText != null)
+        {
+            coinText.text = coinCount.ToString();
+        }
+    }
+
 
     void InitializePlayerStats()
     {
@@ -60,6 +82,8 @@ public class GameSession : MonoBehaviour
         UpdateHPUI();
         UpdateMPUI();
     }
+
+    
 
     // Phương thức bắt đầu tấn công (gọi từ PlayerControll)
     public bool StartAttack(float mpCost)
@@ -242,9 +266,16 @@ public class GameSession : MonoBehaviour
             TakeDamaged(5f);
         }
 
+        if (other.CompareTag("BossAttack"))
+        {
+            bongHitSound.PlayOneShot(bongHitSound.clip);
+            playerLoudHurt.PlayOneShot(playerLoudHurt.clip);
+            TakeDamaged(20f);
+        }
+
         if (other.CompareTag("Heal"))
         {
-            HealHP(20f);
+            HealHP(30f);
             healSound.PlayOneShot(healSound.clip);
             Destroy(other.gameObject, 0.015f);
         }
@@ -253,24 +284,29 @@ public class GameSession : MonoBehaviour
         {
             coinCount += 10;
             coinSound.PlayOneShot(coinSound.clip);
-            coinText.text = coinCount.ToString();
-            Destroy(other.gameObject, 0.015f);
+            UpdateCoinText(); // Cập nhật giao diện
+            Destroy(other.gameObject, 0.01f);
         }
 
         if (other.CompareTag("Emerald"))
         {
             coinCount += 50;
             coinSound.PlayOneShot(coinSound.clip);
-            coinText.text = coinCount.ToString();
-            Destroy(other.gameObject, 0.015f);
+            UpdateCoinText(); // Cập nhật giao diện
+            Destroy(other.gameObject, 0.01f);
         }
 
         if (other.CompareTag("Diamond"))
         {
             coinCount += 100;
             coinSound.PlayOneShot(coinSound.clip);
-            coinText.text = coinCount.ToString();
-            Destroy(other.gameObject, 0.015f);
+            UpdateCoinText();
+            Destroy(other.gameObject, 0.01f);
+        }
+
+        if (other.CompareTag("Chest"))
+        {
+            hitChest.PlayOneShot(hitChest.clip);
         }
     }
 
@@ -324,8 +360,18 @@ public class GameSession : MonoBehaviour
     }
     private void ReloadCurrentScene()
     {
+        SaveCoinCount(); // Lưu lại số coin trước khi tải lại scene
+
         // Tải lại scene hiện tại
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+
+        // Reset trạng thái GameSession sau khi scene được tải lại
+        InitializePlayerStats();
+    }
+
+    public int CoinCount
+    {
+        get { return coinCount; }
     }
 }
