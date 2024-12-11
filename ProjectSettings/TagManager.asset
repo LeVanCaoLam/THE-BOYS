@@ -12,6 +12,7 @@ TagManager:
   - Diamond
   - Emerald
   - BossAttack
+  - Chest
   layers:
   - Default
   - TransparentFX

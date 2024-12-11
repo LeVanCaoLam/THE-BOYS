@@ -30,6 +30,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] AudioSource healSound;
     [SerializeField] AudioSource coinSound;
     [SerializeField] AudioSource bongHitSound;
+    [SerializeField] AudioSource hitChest;
 
     [Header("--- HUD Game Over ---")]
     [SerializeField] GameObject gameOver;
@@ -258,8 +259,6 @@ public class GameSession : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Triggered by: {other.tag}");
-
         if (other.CompareTag("EnemyAttack"))
         {
             hurtPlayerSource.PlayOneShot(hurtPlayerSource.clip);
@@ -271,7 +270,7 @@ public class GameSession : MonoBehaviour
         {
             bongHitSound.PlayOneShot(bongHitSound.clip);
             playerLoudHurt.PlayOneShot(playerLoudHurt.clip);
-            TakeDamaged(10f);
+            TakeDamaged(20f);
         }
 
         if (other.CompareTag("Heal"))
@@ -303,6 +302,11 @@ public class GameSession : MonoBehaviour
             coinSound.PlayOneShot(coinSound.clip);
             UpdateCoinText();
             Destroy(other.gameObject, 0.01f);
+        }
+
+        if (other.CompareTag("Chest"))
+        {
+            hitChest.PlayOneShot(hitChest.clip);
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
@@ -17,6 +18,10 @@ public class Boss_Health : MonoBehaviour
 
     [Header("Boss Components")]
     [SerializeField] Boss_Chase bossChase;  // Tham chiếu đến script Boss_Chase
+
+    [Header("<<---- GameObject ---->>")]
+    // thêm GameObject rương
+    [SerializeField] GameObject chestPrefab;
 
     void Start()
     {
@@ -49,7 +54,7 @@ public class Boss_Health : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
         // Dừng tất cả các hoạt động của boss ngay lập tức
 
@@ -125,6 +130,22 @@ public class Boss_Health : MonoBehaviour
 
         // Đặt thanh máu về 0
         hp_Boss.fillAmount = 0;
+
+        // rơi vật phẩm
+        Invoke("SpawnChest", 3.5f);
+    }
+
+    private void SpawnChest()
+    {
+        // Spawn chest prefab at boss position
+        Instantiate(chestPrefab, transform.position, Quaternion.identity);
+
+        Invoke(nameof(BossDestroyAfterPrefab), 1f);
+    }
+
+    void BossDestroyAfterPrefab()
+    {
+        Destroy(gameObject);
     }
 
     private void UpdateHP()

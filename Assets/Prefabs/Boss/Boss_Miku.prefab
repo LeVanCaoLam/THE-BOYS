@@ -687,7 +687,7 @@ MonoBehaviour:
   chaseDistance: 57
   attackDistance: 2.6
   stopDistance: 2.6
-  speeds: 7
+  speeds: 7.5
 --- !u!114 &7546614473409892821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,7 +702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshCollider: {fileID: 7274435312227368383}
   triggerStart: 0.2
-  triggerActiveTime: 1
+  triggerActiveTime: 0.9
   cooldownTime: 0.6
 --- !u!195 &3124533034354192235
 NavMeshAgent:
