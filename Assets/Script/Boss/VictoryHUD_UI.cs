@@ -90,6 +90,14 @@ public class VictoryHUD_UI : MonoBehaviour
 
     void ShowInformationVictory()
     {
+        backgroundMusic.Stop();
+
+        if (victoryMusic != null)
+        {
+            victoryMusic.loop = true; // Bật chế độ lặp
+            victoryMusic.Play();
+        }
+
         if (gameSession != null && collectText != null)
         {
             collectText.text = "Collected:" + " " + gameSession.CoinCount.ToString() + " Coins";
