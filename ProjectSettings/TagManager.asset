@@ -13,6 +13,11 @@ TagManager:
   - Emerald
   - BossAttack
   - Chest
+  - enemy
+  - Knight
+  - Mage
+  - Rouge
+  - RougeHood
   layers:
   - Default
   - TransparentFX

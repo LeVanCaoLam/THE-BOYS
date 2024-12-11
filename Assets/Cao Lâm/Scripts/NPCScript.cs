@@ -1,124 +1,171 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class NPCScript : MonoBehaviour
 {
-    public GameObject NPCpanel;
-    public TextMeshProUGUI NPCcontent;
-    public List<HoiThoai> hoiThoais = new List<HoiThoai>();
+    public GameObject npcPanel;
+    public TextMeshProUGUI npcKnight;
+    public TextMeshProUGUI npcMage;
+    public TextMeshProUGUI npcRouge;
+    public TextMeshProUGUI npcRougeHood;
+
+    [System.Serializable]
+    public class DialogueSet
+    {
+        public string tag;
+        public string[] dialogueTexts;
+    }
+
+    public DialogueSet[] dialogueSets;
+
     private Coroutine currentCoroutine;
     public Button skip;
+    public Button close; // Thêm nút đóng
 
     private int currentIndex = 0;
     private bool isCompleteDialogue = false;
+    private TextMeshProUGUI currentTextMesh;
+    private string currentTag; // Lưu tag NPC hiện tại
 
     void Start()
     {
-        NPCpanel.SetActive(false);
-        NPCcontent.text = "";
+        npcPanel.SetActive(false);
+        ResetAllTextMeshes();
+
+        if (skip != null)
+        {
+            skip.onClick.AddListener(SkipDialogue);
+        }
+
+        // Thêm sự kiện đóng cho nút close
+        if (close != null)
+        {
+            close.onClick.AddListener(CloseDialogue);
+        }
     }
 
-    private void Update()
+    void ResetAllTextMeshes()
     {
-        if (NPCpanel.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        npcKnight.text = "";
+        npcMage.text = "";
+        npcRouge.text = "";
+        npcRougeHood.text = "";
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
-            if (isCompleteDialogue)
+            DialogueSet matchedSet = System.Array.Find(dialogueSets, set => set.tag == transform.tag);
+
+            if (matchedSet != null)
             {
-                ContinueToNextDialogue();
+                StartDialogue(transform.tag, matchedSet.dialogueTexts);
             }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    // Thêm phương thức OnTriggerExit để đóng dialogue
+    void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            NPCpanel.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-
-            currentIndex = 0;
-            currentCoroutine = StartCoroutine(ReadContent());
+            CloseDialogue();
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    void StartDialogue(string tag, string[] texts)
     {
-        if (other.gameObject.CompareTag("Player"))
+        // Trước khi bắt đầu, reset các text mesh khác
+        ResetAllTextMeshes();
+
+        currentTag = tag;
+        currentTextMesh = GetTextMeshByTag(tag);
+
+        if (currentTextMesh != null)
         {
-            NPCpanel.SetActive(false);
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            npcPanel.SetActive(true);
+            currentIndex = 0;
+            isCompleteDialogue = false;
 
             if (currentCoroutine != null)
             {
                 StopCoroutine(currentCoroutine);
             }
 
-            currentIndex = 0;
+            currentCoroutine = StartCoroutine(TypeDialogue(texts));
         }
     }
 
-    private void ContinueToNextDialogue()
+    IEnumerator TypeDialogue(string[] texts)
     {
-        currentIndex++;
-        if (currentIndex < hoiThoais.Count)
+        while (currentIndex < texts.Length)
         {
-            if (currentCoroutine != null)
+            currentTextMesh.text = "";
+            foreach (char letter in texts[currentIndex])
             {
-                StopCoroutine(currentCoroutine);
+                if (isCompleteDialogue) break;
+
+                currentTextMesh.text += letter;
+                yield return new WaitForSeconds(0.05f);
             }
-            currentCoroutine = StartCoroutine(ReadContent());
+
+            yield return new WaitUntil(() => isCompleteDialogue);
+
+            currentIndex++;
+            isCompleteDialogue = false;
+        }
+
+        EndDialogue();
+    }
+
+    void SkipDialogue()
+    {
+        if (!isCompleteDialogue)
+        {
+            if (currentTextMesh != null)
+            {
+                currentTextMesh.text = dialogueSets[System.Array.FindIndex(dialogueSets, set => set.tag == currentTag)].dialogueTexts[currentIndex];
+            }
+            isCompleteDialogue = true;
         }
         else
         {
-            NPCpanel.SetActive(false);
+            isCompleteDialogue = true;
         }
     }
 
-    private IEnumerator ReadContent()
+    // Thêm phương thức CloseDialogue
+    void CloseDialogue()
     {
-        isCompleteDialogue = false;
-        var currentHoiThoai = hoiThoais[currentIndex];
+        npcPanel.SetActive(false);
+        ResetAllTextMeshes();
 
-        // Sử dụng Rich Text để đảm bảo font chữ
-        string colorTag = currentHoiThoai.doiTuong == "Player" ? "green" : "white";
-        NPCcontent.text = $"<color={colorTag}><b>{currentHoiThoai.doiTuong}:</b> ";
-
-        // Đọc từng ký tự của nội dung
-        string fullContent = currentHoiThoai.noiDung;
-        foreach (var character in fullContent)
-        {
-            NPCcontent.text += character;
-            yield return new WaitForSeconds(0.05f);
-        }
-        NPCcontent.text += "</color>";
-
-        isCompleteDialogue = true;
-    }
-
-    public void End()
-    {
-        NPCpanel.SetActive(false);
-        currentIndex = 0;
-
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
+        // Dừng coroutine nếu đang chạy
         if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);
+            currentCoroutine = null;
         }
     }
 
-    [Serializable]
-    public class HoiThoai
+    void EndDialogue()
     {
-        public string doiTuong;
-        [TextArea] public string noiDung;
+        npcPanel.SetActive(false);
+        ResetAllTextMeshes();
+    }
+
+    TextMeshProUGUI GetTextMeshByTag(string tag)
+    {
+        switch (tag)
+        {
+            case "Knight": return npcKnight;
+            case "Mage": return npcMage;
+            case "Rouge": return npcRouge;
+            case "RougeHood": return npcRougeHood;
+            default: return null;
+        }
     }
 }

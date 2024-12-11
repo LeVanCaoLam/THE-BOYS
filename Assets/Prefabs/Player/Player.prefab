@@ -2002,7 +2002,7 @@ PrefabInstance:
       addedObject: {fileID: 3982594886589915391}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d99ad5125065b9419c4208136f4e219, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8686035378230172289}
+      addedObject: {fileID: 7073944988723189399}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d99ad5125065b9419c4208136f4e219, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8604856202618512308}
@@ -2055,7 +2055,7 @@ MonoBehaviour:
   animator1: {fileID: 5110104207508223295}
   triggerAttack: {fileID: 5873950690617454348}
   currentState: 0
---- !u!114 &8686035378230172289
+--- !u!114 &7073944988723189399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2064,7 +2064,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1963922156791019007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02230f56efddba645b083119bc1b7475, type: 3}
+  m_Script: {fileID: 11500000, guid: d38af8723825f4a429440e1c18f1400b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
